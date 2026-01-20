@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support MGNREGA - Restore and Enrich</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+            --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 0.6s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-size: clamp(2em, 5vw, 3em);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            font-size: 1.3em;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .support-btn {
+            background: var(--secondary-gradient);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(245, 87, 108, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .support-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .support-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(245, 87, 108, 0.5);
+        }
+
+        .support-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .support-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-xl);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section h2 {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            font-size: clamp(1.8em, 4vw, 2.5em);
+            font-weight: 700;
+            border-bottom: 4px solid;
+            border-image: var(--primary-gradient) 1;
+            padding-bottom: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border-left: 5px solid;
+            border-image: var(--warning-gradient) 1;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--warning-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .highlight:hover::before {
+            transform: scaleX(1);
+        }
+
+        .highlight h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .highlight ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlight ul li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .highlight ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #f6a500;
+            font-weight: bold;
+        }
+
+        .highlight p {
+            line-height: 1.8;
+            color: #5a4a00;
+        }
+
+        .language-toggle {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            background: #f7fafc;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .lang-btn {
+            flex: 1;
+            padding: 12px 24px;
+            border: 2px solid transparent;
+            background: transparent;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .lang-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .lang-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
+            transform: scale(1.02);
+        }
+
+        .lang-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: var(--shadow-xl);
+            animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #a0aec0;
+            float: right;
+            font-size: 32px;
+            font-weight: 300;
+            cursor: pointer;
+            line-height: 1;
+            transition: all 0.3s;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: #2d3748;
+            background: #edf2f7;
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: white;
+            color: #2d3748;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input::placeholder {
+            color: #a0aec0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(102, 126, 234, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .tamil-text {
+            font-family: 'Latha', 'Tahoma', 'Noto Sans Tamil', sans-serif;
+            direction: ltr;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 0;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+
+            .content-section {
+                padding: 25px 20px;
+            }
+
+            .highlight {
+                padding: 20px;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                padding: 25px;
+                width: 95%;
+            }
+
+            .language-toggle {
+                flex-direction: column;
+            }
+
+            .lang-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .support-btn {
+                padding: 15px 35px;
+                font-size: 1.1em;
+            }
+
+            .content-section h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌾 Support MGNREGA Restoration 🌾</h1>
+            <p style="font-size: 1.2em; color: #555; margin-bottom: 20px;">
+                Stand with 26.57 Crore Workers to Restore and Enrich MGNREGA
+            </p>
+            <button class="support-btn" onclick="openForm()"><span>✉️ Support</span></button>
+        </header>
+
+        <div class="content-section">
+            <div class="language-toggle">
+                <button class="lang-btn active" onclick="showLanguage('english')">English</button>
+                <button class="lang-btn" onclick="showLanguage('tamil')">தமிழ்</button>
+            </div>
+
+            <div id="english-content" class="lang-content active">
+                <h2>Draft Resolution to Demand Restore and Enrich MGNREGA</h2>
+                
+                <div class="highlight">
+                    <h3>📋 Key Concerns</h3>
+                    <p><strong>We reject VB-GRAMG Act!</strong> It denies the legal right to work guaranteed to all rural families seeking employment under MGNREG Act.</p>
+                </div>
+
+                <div class="highlight">
+                    <h3>⚠️ Critical Issues</h3>
+                    <ul>
+                        <li><strong>Demand-Driven to Supply-Driven:</strong> VB-GRAMG changes the fundamental principle from demand-driven funding to a centralized supply-driven system with predetermined budgets.</li>
+                        <li><strong>Budget Limitations:</strong> Once budget funds are exhausted, workers' legal right to work will be denied.</li>
+                        <li><strong>State Burden:</strong> States must bear 40% of total costs, severely impacting poorer states and reducing job opportunities in high-need areas.</li>
+                        <li><strong>Agricultural Season Restrictions:</strong> Mandatory 60-day halt during peak agricultural periods forces landless agricultural workers into low-wage private employment.</li>
+                        <li><strong>Wage Floor Removal:</strong> The year-round "wage floor" protection provided by MGNREGA is eliminated, attacking workers' legal rights and bargaining power.</li>
+                        <li><strong>Centralization:</strong> Powers are concentrated in the hands of the central government, violating federal principles.</li>
+                        <li><strong>Removal of Mahatma Gandhi's Name:</strong> This disrespects the legacy of the freedom struggle and the historic MGNREGA Act of 2005.</li>
+                    </ul>
+                </div>
+
+                <div class="highlight">
+                    <h3>✅ Our Demands</h3>
+                    <ul>
+                        <li>Increase work days to 200 days</li>
+                        <li>Set minimum wage at ₹700 per day</li>
+                        <li>Ensure daily or weekly wage payments without delay</li>
+                        <li>Grant village assembly authority for monitoring and planning</li>
+                        <li>Integrate MGNREGA with agriculture and allied sectors</li>
+                        <li>End agricultural crisis, rural debt, forced migration, and farmer suicides</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="tamil-content" class="lang-content tamil-text">
+                <h2>MGNREGA-வை மீட்டெடுத்து வலுப்படுத்த வலியுறுத்தும் தீர்மான வரைவு</h2>
+                
+                <div class="highlight">
+                    <h3>📋 முக்கிய கவலைகள்</h3>
+                    <p><strong>VB-GRAMG சட்டத்தை நாங்கள் நிராகரிக்கிறோம்!</strong> MGNREG Act-ல் உறுதி செய்யப்பட்டுள்ள "வேலை கோரும் அனைத்து ஊரக குடும்பங்களுக்கும் சட்டபூர்வமான வேலை உரிமை" என்பதை இது மறுக்கிறது.</p>
+                </div>
+
+                <div class="highlight">
+                    <h3>⚠️ முக்கியமான பிரச்சனைகள்</h3>
+                    <ul>
+                        <li><strong>தேவை-ஆதார முதல் வழங்கல்-ஆதார:</strong> VB-GRAMG தேவைக்கேற்ப நிதி ஒதுக்கப்படும் அடிப்படை கோட்பாட்டை முன் நிர்ணயிக்கப்பட்ட பட்ஜெட்டுடன் மையப்படுத்தப்பட்ட வழங்கல்-ஆதார முறைக்கு மாற்றுகிறது.</li>
+                        <li><strong>பட்ஜெட் வரம்புகள்:</strong> பட்ஜெட் நிதி முடிந்தவுடன் தொழிலாளர்களின் சட்டபூர்வமான வேலை உரிமை மறுக்கப்படும்.</li>
+                        <li><strong>மாநில சுமை:</strong> மாநிலங்கள் மொத்த செலவின் 40%-ஐ ஏற்க வேண்டும், இது ஏழை மாநிலங்களில் கடுமையான தாக்கத்தை ஏற்படுத்தி, அதிக தேவை உள்ள பகுதிகளில் வேலை வாய்ப்புகளை குறைக்கிறது.</li>
+                        <li><strong>வேளாண் கால கட்டுப்பாடுகள்:</strong> உச்ச வேளாண் காலங்களில் 60 நாட்கள் கட்டாய நிறுத்தம் நிலமற்ற விவசாயத் தொழிலாளர்களை குறைந்த கூலியில் தனியார் வேலைக்கு தள்ளுகிறது.</li>
+                        <li><strong>கூலி அடித்தளம் நீக்கம்:</strong> ஆண்டு முழுவதும் MGNREGA வழங்கிய "கூலி அடித்தளம்" பாதுகாப்பு நீக்கப்படுகிறது.</li>
+                        <li><strong>மையப்படுத்தல்:</strong> அதிகாரங்கள் மத்திய அரசின் கைகளில் குவிகின்றன, கூட்டாட்சித் தன்மைக்கு எதிரானது.</li>
+                        <li><strong>மகாத்மா காந்தியின் பெயர் நீக்கம்:</strong> சுதந்திரப் போராட்டத்தின் பாரம்பரியத்திற்கும் 2005 ஆம் ஆண்டு MGNREGA சட்டத்தின் பாரம்பரியத்திற்கும் அவமதிப்பு.</li>
+                    </ul>
+                </div>
+
+                <div class="highlight">
+                    <h3>✅ எங்கள் கோரிக்கைகள்</h3>
+                    <ul>
+                        <li>வேலை நாட்களை 200 நாட்களாக உயர்த்துதல்</li>
+                        <li>குறைந்தபட்ச கூலி நாளுக்கு ரூ.700-க்கு குறையாமல் நிர்ணயித்தல்</li>
+                        <li>தாமதமின்றி தினசரி அல்லது வாராந்திர கூலி வழங்கல்</li>
+                        <li>கிராம சபைக்கு கண்காணிப்பு மற்றும் திட்டமிடலுக்கான அதிகாரம்</li>
+                        <li>வேளாண்மை மற்றும் அதனுடன் இணைந்த துறைகளுடன் MGNREGA ஐ இணைத்தல்</li>
+                        <li>வேளாண் நெருக்கடி, ஊரக கடன்பாடு, கட்டாய இடம்பெயர்வு மற்றும் விவசாயி தற்கொலைகளை முடிவுக்கு கொண்டு வருதல்</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeForm()">&times;</span>
+            <h2 style="margin-bottom: 20px; color: #2c3e50;">Support MGNREGA</h2>
+            <form id="supportForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name / பெயர் *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age / வயது *</label>
+                    <input type="number" id="age" name="age" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="village">Village / கிராமம் *</label>
+                    <input type="text" id="village" name="village" required>
+                </div>
+                <div class="form-group">
+                    <label for="district">District / மாவட்டம் *</label>
+                    <input type="text" id="district" name="district" required>
+                </div>
+                <button type="submit" class="submit-btn">Send Email via Gmail</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showLanguage(lang) {
+            // Hide all language contents
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected language content
+            document.getElementById(lang + '-content').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function openForm() {
+            document.getElementById('supportModal').style.display = 'block';
+        }
+
+        function closeForm() {
+            document.getElementById('supportModal').style.display = 'none';
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const village = document.getElementById('village').value;
+            const district = document.getElementById('district').value;
+
+            // Create email content
+            const subject = encodeURIComponent("Draft Resolution to demand restore and enrich MGNREGA");
+            
+            const emailBody = encodeURIComponent(`Respected Madam,
+
+Her Excellency Smt. Droupadi Murmu
+President of India
+Rashtrapati Bhavan
+New Delhi
+
+Subject: Draft Resolution to demand restore and enrich MGNREGA
+
+Dear Madam President,
+
+On behalf of 26.57 crore workers registered under the historic Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA) across India, we respectfully submit this resolution demanding the repeal of the Viksit Bharat Gramin Rozgar and Awas Yojana (Rural) - VB-GRAMG Act and the restoration and strengthening of the Mahatma Gandhi National Rural Employment Guarantee Act (MGNREG Act).
+
+We reject the VB-GRAMG Act because it denies the "legal right to work for all rural families seeking employment" guaranteed under the MGNREG Act.
+
+Key Concerns:
+1. It changes the fundamental principle from demand-driven funding to a centralized supply-driven system with predetermined budgets.
+2. Once budget funds are exhausted, workers' legal right to work will be denied.
+3. States must bear 40% of total costs, severely impacting poorer states.
+4. Mandatory 60-day halt during peak agricultural periods forces workers into low-wage employment.
+5. The year-round "wage floor" protection is eliminated.
+6. Powers are concentrated in the central government, violating federal principles.
+7. Removal of Mahatma Gandhi's name disrespects the legacy of the freedom struggle.
+
+Our Demands:
+- Increase work days to 200 days
+- Set minimum wage at ₹700 per day
+- Ensure timely daily or weekly wage payments
+- Grant village assembly authority for monitoring and planning
+- Integrate MGNREGA with agriculture and allied sectors
+- End agricultural crisis, rural debt, forced migration, and farmer suicides
+
+We strongly reject the VB-GRAMG Act and demand the restoration and strengthening of MGNREGA.
+
+Awaiting favorable and timely action.
+
+Yours sincerely,
+
+${name}
+Age: ${age}
+Village: ${village}
+District: ${district}
+Date: ${new Date().toLocaleDateString()}`);
+
+            // Gmail compose URL
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=presidentofindia@rb.nic.in&su=${subject}&body=${emailBody}`;
+            
+            // Open Gmail
+            window.open(gmailUrl, '_blank');
+            
+            // Close modal
+            closeForm();
+            
+            // Reset form
+            document.getElementById('supportForm').reset();
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('supportModal');
+            if (event.target == modal) {
+                closeForm();
+            }
+        }
+    </script>
+</body>
+</html>
